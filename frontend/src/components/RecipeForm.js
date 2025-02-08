@@ -7,10 +7,11 @@ const RecipeForm = () => {
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const processedIngredients = ingredients.trim().split(",");
 
@@ -20,14 +21,25 @@ const RecipeForm = () => {
       instruction: instruction,
       ingredients: processedIngredients,
     };
-    fetch(`/api/recipes/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(recipe),
-    }).then((res) => {
-      setIsPending(false);
+    try {
+      const response = await fetch(`/api/recipes/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(recipe),
+      });
+      const json = await response.json();
+
+      if (!response.ok) {
+        throw new Error(json.error || "Failed to submit the recipe");
+      }
+
+      setError(null);
       navigate("/");
-    });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -66,6 +78,7 @@ const RecipeForm = () => {
         {!isPending && <button>Add recipe</button>}
         {isPending && <button>Adding New Recipe</button>}
       </form>
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };
