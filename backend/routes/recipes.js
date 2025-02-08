@@ -13,7 +13,7 @@ router.get("/", getRecipes);
 
 router.get("/:id", getRecipe);
 
-router.post("/", createRecipe);
+router.post("/create", createRecipe);
 
 router.delete("/:id", deleteRecipe);
 

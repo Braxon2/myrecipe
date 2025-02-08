@@ -8,8 +8,6 @@ const getRecipes = async (req, res) => {
 
 const getRecipe = async (req, res) => {
   const { id } = req.params;
-  console.log("Received ID:", id);
-  console.log("Is Valid ObjectId:", mongoose.Types.ObjectId.isValid(id));
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Recipe not found" });
   }

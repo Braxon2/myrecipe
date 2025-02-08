@@ -1,13 +1,76 @@
-body {
+/* google font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins";
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.pages {
+  max-width: 1200px;
+  margin: 20px 0;
+}
+
+/* navbar */
+
+nav {
+  display: flex;
+  margin: 20px 50px;
+  padding: 10px 30px;
+  align-items: center;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+}
+nav h2 {
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+}
+nav li {
+  display: inline-block;
+  font-size: 20px;
+  padding-left: 25px;
+}
+
+a li {
+  color: black;
+}
+
+/*content of the site*/
+
+.pages {
+  width: 1200px;
+  margin: 20px 60px;
+}
+
+a .recipe-preview h3,
+a .recipe-preview p {
+  text-decoration: none;
+  color: black;
+}
+.recipe-preview {
+  /* width: 600px; */
+  margin: 50px 0;
+  border: 1px solid black;
+}
+
+/*form */
+
+.create {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.create input,
+.create textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.create .instruction {
+  height: 200px;
 }
