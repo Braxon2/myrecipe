@@ -63,8 +63,13 @@ a li {
   margin: 20px 60px;
 }
 
-.recipe-list a {
+.recipe-preview a {
   text-decoration: none;
+  color: black;
+}
+
+.recipe-preview button:hover {
+  background-color: #e7195a;
 }
 
 .recipe-preview {

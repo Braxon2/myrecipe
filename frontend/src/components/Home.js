@@ -21,7 +21,11 @@ const Home = () => {
     <div className="recipe-list">
       <h2>All recepies</h2>
 
-      {recipes ? <RecipeList recipes={recipes} /> : <p>Loading...</p>}
+      {recipes ? (
+        <RecipeList recipes={recipes} setRecipes={setRecipes} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
