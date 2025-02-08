@@ -6,7 +6,6 @@ const RecipeForm = () => {
   const [author, setAuthor] = useState("");
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [ingredientsArray, setIngredientsArray] = useState([]);
   const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
@@ -26,8 +25,6 @@ const RecipeForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(recipe),
     }).then((res) => {
-      console.log(ingredientsArray);
-
       setIsPending(false);
       navigate("/");
     });
