@@ -6,6 +6,17 @@
   font-family: "Poppins";
 }
 
+:root {
+  --primary: #e9c46a;
+  --nav: #2a9d8f;
+  --error: #e7195a;
+}
+
+.App {
+  background-color: var(--primary);
+  height: 100vh;
+}
+
 .pages {
   max-width: 1200px;
   margin: 20px 0;
@@ -15,11 +26,11 @@
 
 nav {
   display: flex;
-  margin: 20px 50px;
-  padding: 10px 30px;
+  padding: 10px 100px;
   align-items: center;
   border-bottom: 1px solid black;
   justify-content: space-between;
+  background-color: var(--nav);
 }
 nav h2 {
   text-decoration: none;
@@ -36,6 +47,15 @@ a li {
   color: black;
 }
 
+.recipe-list {
+  margin-left: 30px;
+  padding-top: 10px;
+}
+
+.recipe-list h2 {
+  font-size: 2rem;
+}
+
 /*content of the site*/
 
 .pages {
@@ -43,22 +63,39 @@ a li {
   margin: 20px 60px;
 }
 
-a .recipe-preview h3,
-a .recipe-preview p {
+.recipe-list a {
   text-decoration: none;
-  color: black;
-}
-.recipe-preview {
-  /* width: 600px; */
-  margin: 50px 0;
-  border: 1px solid black;
 }
 
+.recipe-preview {
+  font-size: 1.125rem;
+  margin: 50px 0;
+  color: black;
+}
+
+.recipe-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+}
 /*form */
 
 .create {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.create button {
+  background-color: #2a9d8f;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.create label {
+  font-weight: 600;
+}
+
+::placeholder {
+  color: black;
+  font-weight: 500;
 }
 
 .create input,
@@ -69,8 +106,32 @@ a .recipe-preview p {
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;
+  background-color: var(--primary);
+  border: 1px solid black;
 }
 
 .create .instruction {
   height: 200px;
+}
+
+/*Details page*/
+
+.recipe-detail h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.recipe-detail h4 {
+  font-size: 1.2rem;
+  margin-bottom: 35px;
+}
+
+.recipe-detail p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.recipe-detail li {
+  margin: 20px 0;
+  font-weight: 600;
 }
