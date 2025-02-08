@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const RecipeList = ({ recipes, setRecipes }) => {
   const handleDelete = async (id) => {
@@ -28,6 +29,11 @@ const RecipeList = ({ recipes, setRecipes }) => {
               <h3>{recipe.title}</h3>
               <p>Written by: {recipe.author}</p>
             </Link>
+            <p>
+              {formatDistanceToNow(new Date(recipe.createdAt), {
+                addSuffix: true,
+              })}
+            </p>
             <button
               onClick={() => handleDelete(recipe._id)}
               className="delete-btn"
