@@ -25,8 +25,14 @@ function App() {
               path="/recipes"
               element={user ? <Home /> : <Navigate to="/login" />}
             />
-            <Route path="/create" element={<RecipeForm />} />
-            <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route
+              path="/create"
+              element={user ? <RecipeForm /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/recipes/:id"
+              element={user ? <RecipeDetails /> : <Navigate to="/login" />}
+            />
             <Route
               path="/signup"
               element={!user ? <Signup /> : <Navigate to="/" />}
