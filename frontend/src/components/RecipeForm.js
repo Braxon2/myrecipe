@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecipeContext } from "../hooks/useRecipesContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const RecipeForm = () => {
+  const { dispatch } = useRecipeContext();
+  const { user } = useAuthContext();
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [instruction, setInstruction] = useState("");
@@ -15,6 +20,11 @@ const RecipeForm = () => {
     e.preventDefault();
     const processedIngredients = ingredients.trim().split(",");
 
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
+
     const recipe = {
       title: title,
       author: author,
@@ -24,7 +34,10 @@ const RecipeForm = () => {
     try {
       const response = await fetch(`/api/recipes/create`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
         body: JSON.stringify(recipe),
       });
       const json = await response.json();
@@ -33,8 +46,11 @@ const RecipeForm = () => {
         throw new Error(json.error || "Failed to submit the recipe");
       }
 
-      setError(null);
-      navigate("/");
+      if (response.ok) {
+        setError(null);
+        navigate("/");
+        dispatch({ type: "CREATE_RECIPE", payload: json });
+      }
     } catch (error) {
       setError(error.message);
     } finally {

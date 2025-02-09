@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const recipeRoute = require("./routes/recipes");
+const userRoute = require("./routes/user");
 
 const cors = require("cors");
 
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 //routes
 
 app.use("/api/recipes", recipeRoute);
+app.use("/api/user", userRoute);
 
 //connection to db
 mongoose

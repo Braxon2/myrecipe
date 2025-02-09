@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { useRecipeContext } from "../hooks/useRecipesContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-const RecipeList = ({ recipes, setRecipes }) => {
+const RecipeList = ({ recipes }) => {
+  const { dispatch } = useRecipeContext();
+  const { user } = useAuthContext();
+
+  if (!user) {
+    return;
+  }
+
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`/api/recipes/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to delete the recipe");
-      }
+      const json = await response.json();
 
-      setRecipes((prevRecipes) =>
-        prevRecipes.filter((recipe) => recipe._id !== id)
-      );
+      if (response.ok) {
+        dispatch({ type: "DELETE_RECIPE", payload: json });
+      }
     } catch (error) {
       console.error("Error deleting recipe:", error);
     }
