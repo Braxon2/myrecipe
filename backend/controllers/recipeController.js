@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Recipe = require("../models/Recipe");
 
 const getRecipes = async (req, res) => {
-  const recipes = await Recipe.find().sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const recipes = await Recipe.find({ user_id }).sort({ createdAt: -1 });
   res.status(200).json(recipes);
 };
 
@@ -23,9 +24,6 @@ const createRecipe = async (req, res) => {
   if (!title) {
     emptyFields.push("title");
   }
-  if (!author) {
-    emptyFields.push("author");
-  }
   if (!instruction) {
     emptyFields.push("instruction");
   }
@@ -40,11 +38,19 @@ const createRecipe = async (req, res) => {
   }
 
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const user_id = req.user._id;
+    const nameUser = req.user.name;
+
     const recipe = await Recipe.create({
       title,
-      author,
+      nameUser,
       instruction,
       ingredients,
+      user_id,
     });
     res.status(200).json(recipe);
   } catch (err) {

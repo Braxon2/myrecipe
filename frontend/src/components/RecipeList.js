@@ -37,7 +37,7 @@ const RecipeList = ({ recipes }) => {
           <div className="recipe-preview" key={recipe._id}>
             <Link to={`/recipes/${recipe._id}`}>
               <h3>{recipe.title}</h3>
-              <p>Written by: {recipe.author}</p>
+              <p>Written by: {recipe.nameUser}</p>
             </Link>
             <p>
               {formatDistanceToNow(new Date(recipe.createdAt), {

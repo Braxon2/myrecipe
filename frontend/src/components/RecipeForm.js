@@ -27,9 +27,10 @@ const RecipeForm = () => {
 
     const recipe = {
       title: title,
-      author: author,
+      nameUser: user.nameUser,
       instruction: instruction,
       ingredients: processedIngredients,
+      user_id: user._id,
     };
     try {
       const response = await fetch(`/api/recipes/create`, {
@@ -66,14 +67,6 @@ const RecipeForm = () => {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-
-        <label>Author:</label>
-        <input
-          type="text"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
           required
         />
 

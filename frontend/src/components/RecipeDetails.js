@@ -48,7 +48,7 @@ const RecipeDetails = () => {
       {recipe && (
         <div>
           <h3>{recipe?.title}</h3>
-          <h4>Author: {recipe?.author}</h4>
+          <h4>Author: {recipe?.nameUser}</h4>
           <p>Posted: {formatDate(recipe?.createdAt)}</p>
           <p>{recipe?.instruction}</p>
           {recipe?.ingredients?.map((ingredient, index) => (
